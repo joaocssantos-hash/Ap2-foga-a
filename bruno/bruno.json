@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Doceria API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

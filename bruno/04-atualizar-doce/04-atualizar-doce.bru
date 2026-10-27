@@ -1,0 +1,30 @@
+meta {
+  name: 04 - Atualizar Doce
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/api/doces/1
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Bolo de Cenoura com Brigadeiro Especial",
+    "categoria": "Bolos",
+    "sabor": "Chocolate Trufado",
+    "preco": 21.00,
+    "descricao": "Massa artesanal super fofinha de cenoura com cascata de brigadeiro gourmet trufado.",
+    "imagemUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80"
+  }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:5000
+}

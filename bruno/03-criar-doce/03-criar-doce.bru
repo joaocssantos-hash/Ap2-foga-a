@@ -1,0 +1,30 @@
+meta {
+  name: 03 - Criar Doce
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/doces
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Macaron Francês de Pistache",
+    "categoria": "Sobremesas",
+    "sabor": "Pistache",
+    "preco": 9.50,
+    "descricao": "Clássico doce francês crocante por fora e macio por dentro, com ganache de pistache.",
+    "imagemUrl": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=500&q=80"
+  }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:5000
+}

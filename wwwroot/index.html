@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doceria Gourmet - Delivery Online (AP2)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <span class="brand-icon" aria-hidden="true">🧁</span>
+                <div>
+                    <h1>Doceria Gourmet</h1>
+                    <span class="brand-subtitle">Cardápio Online & Delivery</span>
+                </div>
+            </div>
+            <div class="demo-badge" role="status">
+                <span class="badge-dot" aria-hidden="true"></span>
+                <strong>Conectado à API</strong> (Persistência SQLite com EF Core)
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Notificação de feedback acessível -->
+        <div id="feedback-container" class="feedback-container" aria-live="polite" role="status">
+            <div id="feedback-message" class="feedback-message info">
+                <span>Doceria conectada à API com persistência em banco de dados SQLite.</span>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <!-- Painel do Formulário (Adicionar / Visualizar / Editar) -->
+            <section class="panel form-panel" aria-labelledby="form-heading">
+                <div class="panel-header">
+                    <h2 id="form-heading">Adicionar Doce ao Cardápio</h2>
+                    <p id="form-subheading" class="panel-description">Preencha os campos para cadastrar um novo item no cardápio da doceria.</p>
+                </div>
+
+                <form id="doce-form" novalidate>
+                    <input type="hidden" id="doce-id" name="id">
+
+                    <!-- Exibição de ID (visível apenas em modo de edição) -->
+                    <div class="form-group" id="group-id-display" style="display: none;">
+                        <label for="doce-id-display">ID do Doce:</label>
+                        <input type="text" id="doce-id-display" readonly class="input-readonly">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doce-nome">Nome do Doce <span class="required">*</span></label>
+                        <input type="text" id="doce-nome" name="nome" placeholder="Ex.: Bolo de Cenoura com Brigadeiro" required maxlength="80" autocomplete="off">
+                        <span class="field-error" id="error-nome"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="doce-categoria">Categoria <span class="required">*</span></label>
+                            <select id="doce-categoria" name="categoria" required>
+                                <option value="">Selecione a categoria</option>
+                                <option value="Bolos">Bolos</option>
+                                <option value="Tortas">Tortas</option>
+                                <option value="Brigadeiros">Brigadeiros</option>
+                                <option value="Doces no Pote">Doces no Pote</option>
+                                <option value="Sobremesas">Sobremesas</option>
+                                <option value="Donuts">Donuts</option>
+                                <option value="Cookies">Cookies</option>
+                                <option value="Gelados">Gelados</option>
+                            </select>
+                            <span class="field-error" id="error-categoria"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="doce-sabor">Sabor / Variação (Opcional)</label>
+                            <input type="text" id="doce-sabor" name="sabor" placeholder="Ex.: Chocolate Belga, Morango..." maxlength="50" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doce-preco">Preço (R$) <span class="required">*</span></label>
+                        <input type="number" id="doce-preco" name="preco" placeholder="Ex.: 18.50" step="0.01" min="0.01" max="9999" required>
+                        <span class="field-error" id="error-preco"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doce-imagem">URL da Imagem / Foto (Opcional)</label>
+                        <input type="url" id="doce-imagem" name="imagemUrl" placeholder="Ex.: https://... (Vazio usará foto ilustrativa)" autocomplete="off">
+                        <span class="field-hint">Se deixar vazio, o sistema atribuirá uma foto ilustrativa de alta qualidade.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doce-descricao">Descrição <span class="required">*</span></label>
+                        <textarea id="doce-descricao" name="descricao" rows="3" placeholder="Ingredientes irresistíveis, detalhes e características do doce..." required maxlength="300"></textarea>
+                        <span class="field-error" id="error-descricao"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="btn-submit" class="btn btn-primary">Cadastrar no Cardápio</button>
+                        <button type="button" id="btn-cancel" class="btn btn-secondary">Limpar / Novo</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Painel do Cardápio de Doces -->
+            <section class="panel list-panel" aria-labelledby="list-heading">
+                <div class="panel-header list-header">
+                    <div>
+                        <h2 id="list-heading">Cardápio da Doceria</h2>
+                        <p class="panel-description">Total no cardápio: <strong id="total-count">0</strong> itens</p>
+                    </div>
+                    
+                    <div class="search-wrapper">
+                        <label for="filter-input" class="search-label">Filtrar doces:</label>
+                        <input type="search" id="filter-input" placeholder="Buscar por nome, categoria ou sabor..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div id="doce-list" class="doce-grid" role="region" aria-label="Lista de Doces">
+                    <!-- Cards inseridos dinamicamente pelo app.js a partir da API -->
+                </div>
+
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <p>Nenhum doce encontrado no cardápio.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>Doceria Gourmet API — Frontend integrado ao ASP.NET Core Minimal API com persistência SQLite e Entity Framework Core.</p>
+        <p class="disclaimer">AP2 — CRUD persistente com frontend integrado.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

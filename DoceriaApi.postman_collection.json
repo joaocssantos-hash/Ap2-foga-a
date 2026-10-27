@@ -1,0 +1,164 @@
+{
+  "info": {
+    "_postman_id": "b8a5b28d-2e11-4d1a-bf56-a94f1c1f51cb",
+    "name": "Doceria API",
+    "description": "Collection de testes para a API da Doceria Gourmet (AP2 - CRUD persistente com EF Core e SQLite)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5050",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "00 - Status da API",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api",
+          "host": ["{{baseUrl}}"],
+          "path": ["api"]
+        }
+      }
+    },
+    {
+      "name": "01 - Listar Doces",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/doces",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces"]
+        }
+      }
+    },
+    {
+      "name": "02 - Buscar Doce por ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/doces/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces", "1"]
+        }
+      }
+    },
+    {
+      "name": "03 - Criar Doce",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Macaron Francês de Pistache\",\n  \"categoria\": \"Sobremesas\",\n  \"sabor\": \"Pistache\",\n  \"preco\": 9.50,\n  \"descricao\": \"Clássico doce francês crocante por fora e macio por dentro, com ganache de pistache.\",\n  \"imagemUrl\": \"https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=500&q=80\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/doces",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces"]
+        }
+      }
+    },
+    {
+      "name": "04 - Atualizar Doce",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Bolo de Cenoura com Brigadeiro Especial\",\n  \"categoria\": \"Bolos\",\n  \"sabor\": \"Chocolate Trufado\",\n  \"preco\": 21.00,\n  \"descricao\": \"Massa artesanal super fofinha de cenoura com cascata de brigadeiro gourmet trufado.\",\n  \"imagemUrl\": \"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/doces/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces", "1"]
+        }
+      }
+    },
+    {
+      "name": "05 - Excluir Doce",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/doces/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces", "1"]
+        }
+      }
+    },
+    {
+      "name": "06 - Buscar Doce Excluído (404)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/doces/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces", "1"]
+        }
+      }
+    },
+    {
+      "name": "07 - Buscar Doce Inexistente (404)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/doces/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "doces", "9999"]
+        }
+      }
+    }
+  ]
+}
