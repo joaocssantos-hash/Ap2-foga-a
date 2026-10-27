@@ -189,7 +189,7 @@ O repositório disponibiliza as collections prontas para validação dos endpoin
 ## 🎬 Vídeo de Demonstração — AP2
 
 > 🔗 **Link público do vídeo:**  
-> **[INSERIR_LINK_DO_SEU_VIDEO_AQUI]**
+> **[https://youtu.be/qfxr5nxZGOU]**
 
 ### Roteiro apresentado no vídeo:
 1. **Apresentação**: Tema da Doceria Online (tipo iFood), organização das pastas do backend, frontend e collections de testes.
